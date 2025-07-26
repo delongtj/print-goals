@@ -37,9 +37,9 @@ export default function Home() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
+      <div className="min-h-screen bg-white p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold text-center mb-8">Print Goals</h1>
+          <h1 className="text-3xl font-light text-center mb-8 border-b border-gray-300 pb-4">Print Goals</h1>
           <p className="text-center text-gray-600 mb-8">
             Sign in to create and manage your goal lists
           </p>
@@ -50,31 +50,31 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-white p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Print Goals</h1>
-          <button
-            onClick={handleSignOut}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
-          >
-            Sign Out
-          </button>
-        </div>
-        
-        <div className="bg-white rounded-lg shadow-md p-6">
-          {selectedGoalList ? (
-            <GoalEditor 
-              goalList={selectedGoalList} 
-              onBack={() => setSelectedGoalList(null)} 
-            />
-          ) : (
+        {selectedGoalList ? (
+          <GoalEditor 
+            goalList={selectedGoalList} 
+            onBack={() => setSelectedGoalList(null)} 
+          />
+        ) : (
+          <div>
+            <div className="flex justify-between items-center mb-8 border-b border-gray-300 pb-4">
+              <h1 className="text-3xl font-light">Print Goals</h1>
+              <button
+                onClick={handleSignOut}
+                className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+              >
+                Sign Out
+              </button>
+            </div>
+            
             <div>
-              <h2 className="text-2xl font-bold mb-6">Your Goal Lists</h2>
+              <h2 className="text-2xl font-normal mb-6">Your Goal Lists</h2>
               <GoalListManager user={user} onSelectGoalList={setSelectedGoalList} />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )

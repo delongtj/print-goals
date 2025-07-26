@@ -79,11 +79,11 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           placeholder="New goal list title..."
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-3 py-2 border border-gray-400 focus:outline-none focus:border-gray-600"
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium"
         >
           Create List
         </button>
@@ -96,7 +96,7 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
       ) : (
         <div className="space-y-2">
           {goalLists.map((list) => (
-            <div key={list.id} className="flex items-center gap-2 p-3 bg-white border rounded-md">
+            <div key={list.id} className="flex items-center gap-2 p-3 border border-gray-300 hover:bg-gray-50">
               {editingId === list.id ? (
                 <input
                   type="text"
@@ -109,12 +109,12 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
                       setEditingId(null)
                     }
                   }}
-                  className="flex-1 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 px-2 py-1 border border-gray-400 focus:outline-none focus:border-gray-600"
                   autoFocus
                 />
               ) : (
                 <h3
-                  className="flex-1 text-lg font-medium cursor-pointer hover:text-blue-600"
+                  className="flex-1 text-lg font-normal cursor-pointer hover:text-gray-800"
                   onClick={() => onSelectGoalList(list)}
                 >
                   {list.title}
@@ -123,14 +123,14 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
               
               <button
                 onClick={() => setEditingId(editingId === list.id ? null : list.id)}
-                className="px-2 py-1 text-sm text-gray-600 hover:text-gray-800"
+                className="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
               >
                 {editingId === list.id ? 'Cancel' : 'Edit'}
               </button>
               
               <button
                 onClick={() => handleDelete(list.id)}
-                className="px-2 py-1 text-sm text-red-600 hover:text-red-800"
+                className="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
               >
                 Delete
               </button>
