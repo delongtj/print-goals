@@ -37,10 +37,27 @@ export default function PrintView({ title, goals }: Props) {
         if (labelStyle === "monthly") {
           div.textContent = months[i - 1]
         } else if (labelStyle === "numeric") {
-          div.textContent = i.toString()
+          // Use same milestone logic as GoalDisplay
+          if (count <= 52) {
+            // Weekly or small counts: show all numbers
+            div.textContent = i.toString()
+          } else {
+            // Large counts: show every 10th for better milestone tracking
+            if (i % 10 === 0) {
+              div.textContent = i.toString()
+            }
+          }
         }
 
-        div.style.width = pct + "%"
+        // Use smart width matching GoalDisplay component
+        if (count < 40) {
+          // Fill one row: 1/N width for N boxes
+          div.style.width = (100 / count) + "%"
+        } else {
+          // Use 40-per-row grid: 1/40th = 2.5%
+          div.style.width = "2.5%"
+        }
+        
         progressTracker.appendChild(div)
       }
 

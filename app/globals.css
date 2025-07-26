@@ -75,10 +75,13 @@
     box-sizing: border-box !important;
     height: 20px !important;
     line-height: 18px !important;
+    /* Width will be set by JavaScript based on count */
     min-width: 20px !important;
     max-width: 140px !important;
+    flex-shrink: 0 !important;
     text-align: center !important;
     background: white !important;
+    font-size: 9px !important;
   }
 
   /* Hide all screen UI elements */

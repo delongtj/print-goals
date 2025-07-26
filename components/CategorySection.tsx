@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createGoal } from '@/lib/goals'
+import GoalDisplay from './GoalDisplay'
 import type { Goal } from '@/lib/types'
 
 interface Props {
@@ -25,23 +26,49 @@ export default function CategorySection({
   const [newGoal, setNewGoal] = useState({
     title: '',
     goal_type: 'checkbox' as 'checkbox' | 'steps',
-    step_count: undefined as number | undefined,
-    label_style: undefined as 'numeric' | 'monthly' | undefined
+    progress_style: 'monthly' as 'monthly' | 'weekly' | 'daily' | 'count',
+    step_count: undefined as number | undefined
   })
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [editingGoal, setEditingGoal] = useState<{
+    title: string
+    goal_type: 'checkbox' | 'steps'
+    progress_style: 'monthly' | 'weekly' | 'daily' | 'count'
+    step_count?: number
+  } | null>(null)
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!newGoal.title.trim()) return
 
     try {
+      // Calculate step count based on progress style
+      let stepCount: number | undefined
+      let labelStyle: 'numeric' | 'monthly' | undefined
+
+      if (newGoal.goal_type === 'steps') {
+        if (newGoal.progress_style === 'monthly') {
+          stepCount = 12
+          labelStyle = 'monthly'
+        } else if (newGoal.progress_style === 'weekly') {
+          stepCount = 52
+          labelStyle = 'numeric'
+        } else if (newGoal.progress_style === 'daily') {
+          stepCount = 365
+          labelStyle = 'numeric'
+        } else if (newGoal.progress_style === 'count') {
+          stepCount = newGoal.step_count
+          labelStyle = 'numeric'
+        }
+      }
+
       const goalData = {
         goal_list_id: goalListId,
         title: newGoal.title.trim(),
         category,
         goal_type: newGoal.goal_type,
-        step_count: newGoal.goal_type === 'steps' ? newGoal.step_count : undefined,
-        label_style: newGoal.goal_type === 'steps' ? newGoal.label_style : undefined,
+        step_count: stepCount,
+        label_style: labelStyle,
         order_index: goals.length
       }
 
@@ -50,8 +77,8 @@ export default function CategorySection({
       setNewGoal({
         title: '',
         goal_type: 'checkbox',
-        step_count: undefined,
-        label_style: undefined
+        progress_style: 'monthly',
+        step_count: undefined
       })
       setIsAdding(false)
     } catch (error) {
@@ -59,12 +86,64 @@ export default function CategorySection({
     }
   }
 
-  const handleUpdate = async (goalId: string, updates: Partial<Goal>) => {
+  const startEditing = (goal: Goal) => {
+    // Determine progress style from existing goal data
+    let progressStyle: 'monthly' | 'weekly' | 'daily' | 'count' = 'monthly'
+    if (goal.goal_type === 'steps' && goal.step_count) {
+      if (goal.step_count === 12 && goal.label_style === 'monthly') {
+        progressStyle = 'monthly'
+      } else if (goal.step_count === 52 && goal.label_style === 'numeric') {
+        progressStyle = 'weekly'
+      } else if (goal.step_count === 365 && goal.label_style === 'numeric') {
+        progressStyle = 'daily'
+      } else {
+        progressStyle = 'count'
+      }
+    }
+
+    setEditingId(goal.id)
+    setEditingGoal({
+      title: goal.title,
+      goal_type: goal.goal_type,
+      progress_style: progressStyle,
+      step_count: goal.step_count
+    })
+  }
+
+  const handleUpdate = async () => {
+    if (!editingGoal || !editingId) return
+
     try {
+      // Calculate step count and label style from editing state
+      let stepCount: number | undefined
+      let labelStyle: 'numeric' | 'monthly' | undefined
+
+      if (editingGoal.goal_type === 'steps') {
+        if (editingGoal.progress_style === 'monthly') {
+          stepCount = 12
+          labelStyle = 'monthly'
+        } else if (editingGoal.progress_style === 'weekly') {
+          stepCount = 52
+          labelStyle = 'numeric'
+        } else if (editingGoal.progress_style === 'daily') {
+          stepCount = 365
+          labelStyle = 'numeric'
+        } else if (editingGoal.progress_style === 'count') {
+          stepCount = editingGoal.step_count
+          labelStyle = 'numeric'
+        }
+      }
+
       const { updateGoal } = await import('@/lib/goals')
-      const updated = await updateGoal(goalId, updates)
+      const updated = await updateGoal(editingId, {
+        title: editingGoal.title.trim(),
+        goal_type: editingGoal.goal_type,
+        step_count: stepCount,
+        label_style: labelStyle
+      })
       onGoalUpdate(updated)
       setEditingId(null)
+      setEditingGoal(null)
     } catch (error) {
       console.error('Error updating goal:', error)
     }
@@ -84,60 +163,119 @@ export default function CategorySection({
 
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-normal mb-4 border-b border-gray-300 pb-2">
+      <h2 
+        className="text-2xl font-normal mb-4"
+        style={{
+          fontSize: '24px',
+          margin: '30px 0 10px',
+          fontFamily: 'Lato, sans-serif'
+        }}
+      >
         {category}
       </h2>
 
       {/* Existing goals */}
-      <div className="space-y-2 mb-4">
+      <div className="space-y-4 mb-6">
         {goals.map((goal) => (
-          <div key={goal.id} className="group flex items-start gap-3 py-1">
-            {editingId === goal.id ? (
-              <div className="flex-1 space-y-2">
+          <div key={goal.id} className="group">
+            {editingId === goal.id && editingGoal ? (
+              <div className="space-y-3 p-3 border border-gray-300 bg-gray-50">
                 <input
                   type="text"
-                  defaultValue={goal.title}
-                  onBlur={(e) => handleUpdate(goal.id, { title: e.target.value })}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleUpdate(goal.id, { title: e.currentTarget.value })
-                    } else if (e.key === 'Escape') {
-                      setEditingId(null)
-                    }
-                  }}
+                  value={editingGoal.title}
+                  onChange={(e) => setEditingGoal({...editingGoal, title: e.target.value})}
                   className="w-full px-2 py-1 text-lg border border-gray-400 focus:outline-none focus:border-gray-600"
                   autoFocus
                 />
-              </div>
-            ) : (
-              <>
-                <div className="flex-1 flex items-start gap-3">
-                  {goal.goal_type === 'checkbox' && (
-                    <div className="border-2 border-black w-5 h-5 mt-0.5 flex-shrink-0"></div>
-                  )}
-                  <span className="text-lg leading-tight">{goal.title}</span>
-                  {goal.goal_type === 'steps' && (
-                    <span className="text-sm text-gray-600 mt-0.5">
-                      ({goal.step_count} steps, {goal.label_style})
-                    </span>
+                
+                <div className="flex gap-4 items-center">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name={`edit_goal_type_${goal.id}`}
+                      value="checkbox"
+                      checked={editingGoal.goal_type === 'checkbox'}
+                      onChange={(e) => setEditingGoal({...editingGoal, goal_type: e.target.value as 'checkbox'})}
+                    />
+                    <span className="text-sm">Pass/Fail</span>
+                  </label>
+                  
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name={`edit_goal_type_${goal.id}`}
+                      value="steps"
+                      checked={editingGoal.goal_type === 'steps'}
+                      onChange={(e) => setEditingGoal({...editingGoal, goal_type: e.target.value as 'steps'})}
+                    />
+                    <span className="text-sm">Progress</span>
+                  </label>
+
+                  {editingGoal.goal_type === 'steps' && (
+                    <>
+                      <select
+                        value={editingGoal.progress_style}
+                        onChange={(e) => setEditingGoal({...editingGoal, progress_style: e.target.value as 'monthly' | 'weekly' | 'daily' | 'count'})}
+                        className="px-2 py-1 text-sm border border-gray-400 focus:outline-none focus:border-gray-600"
+                      >
+                        <option value="monthly">Monthly (12)</option>
+                        <option value="weekly">Weekly (52)</option>
+                        <option value="daily">Daily (365)</option>
+                        <option value="count">Custom Count</option>
+                      </select>
+
+                      {editingGoal.progress_style === 'count' && (
+                        <input
+                          type="number"
+                          min="1"
+                          max="1000"
+                          value={editingGoal.step_count || ''}
+                          onChange={(e) => setEditingGoal({...editingGoal, step_count: parseInt(e.target.value) || undefined})}
+                          placeholder="Count"
+                          className="w-20 px-2 py-1 text-sm border border-gray-400 focus:outline-none focus:border-gray-600"
+                        />
+                      )}
+                    </>
                   )}
                 </div>
-                
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+
+                <div className="flex gap-2">
                   <button
-                    onClick={() => setEditingId(goal.id)}
-                    className="text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1"
+                    onClick={handleUpdate}
+                    className="text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => {
+                      setEditingId(null)
+                      setEditingGoal(null)
+                    }}
+                    className="text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="relative">
+                <GoalDisplay goal={goal} />
+                
+                <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1 bg-white border border-gray-300 rounded shadow-sm">
+                  <button
+                    onClick={() => startEditing(goal)}
+                    className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(goal.id)}
-                    className="text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1"
+                    className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
                   >
                     Delete
                   </button>
                 </div>
-              </>
+              </div>
             )}
           </div>
         ))}
@@ -165,7 +303,7 @@ export default function CategorySection({
                 checked={newGoal.goal_type === 'checkbox'}
                 onChange={(e) => setNewGoal({...newGoal, goal_type: e.target.value as 'checkbox'})}
               />
-              <span className="text-sm">Checkbox</span>
+              <span className="text-sm">Pass/Fail</span>
             </label>
             
             <label className="flex items-center gap-2">
@@ -176,32 +314,34 @@ export default function CategorySection({
                 checked={newGoal.goal_type === 'steps'}
                 onChange={(e) => setNewGoal({...newGoal, goal_type: e.target.value as 'steps'})}
               />
-              <span className="text-sm">Steps</span>
+              <span className="text-sm">Progress</span>
             </label>
 
             {newGoal.goal_type === 'steps' && (
               <>
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={newGoal.step_count || ''}
-                  onChange={(e) => setNewGoal({...newGoal, step_count: parseInt(e.target.value) || undefined})}
-                  placeholder="Count"
-                  className="w-16 px-2 py-1 text-sm border border-gray-400 focus:outline-none focus:border-gray-600"
-                  required
-                />
-                
                 <select
-                  value={newGoal.label_style || ''}
-                  onChange={(e) => setNewGoal({...newGoal, label_style: e.target.value as 'numeric' | 'monthly' || undefined})}
+                  value={newGoal.progress_style}
+                  onChange={(e) => setNewGoal({...newGoal, progress_style: e.target.value as 'monthly' | 'weekly' | 'daily' | 'count'})}
                   className="px-2 py-1 text-sm border border-gray-400 focus:outline-none focus:border-gray-600"
-                  required
                 >
-                  <option value="">Style</option>
-                  <option value="numeric">Numeric</option>
-                  <option value="monthly">Monthly</option>
+                  <option value="monthly">Monthly (12)</option>
+                  <option value="weekly">Weekly (52)</option>
+                  <option value="daily">Daily (365)</option>
+                  <option value="count">Custom Count</option>
                 </select>
+
+                {newGoal.progress_style === 'count' && (
+                  <input
+                    type="number"
+                    min="1"
+                    max="1000"
+                    value={newGoal.step_count || ''}
+                    onChange={(e) => setNewGoal({...newGoal, step_count: parseInt(e.target.value) || undefined})}
+                    placeholder="Count"
+                    className="w-20 px-2 py-1 text-sm border border-gray-400 focus:outline-none focus:border-gray-600"
+                    required
+                  />
+                )}
               </>
             )}
           </div>
@@ -220,8 +360,8 @@ export default function CategorySection({
                 setNewGoal({
                   title: '',
                   goal_type: 'checkbox',
-                  step_count: undefined,
-                  label_style: undefined
+                  progress_style: 'monthly',
+                  step_count: undefined
                 })
               }}
               className="px-3 py-1 text-sm border border-gray-400 bg-white hover:bg-gray-100"

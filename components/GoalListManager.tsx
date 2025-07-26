@@ -39,6 +39,7 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
       const newList = await createGoalList(user.id, newTitle.trim())
       setGoalLists([newList, ...goalLists])
       setNewTitle('')
+      onSelectGoalList(newList)  // Jump directly to the new list
     } catch (error) {
       console.error('Error creating goal list:', error)
     }
@@ -78,8 +79,8 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
           type="text"
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
-          placeholder="New goal list title..."
-          className="flex-1 px-3 py-2 border border-gray-400 focus:outline-none focus:border-gray-600"
+          placeholder={`E.g. ${new Date().getFullYear() + 1} Goals`}
+          className="flex-1 px-3 py-2 border border-gray-400 focus:outline-none focus:border-gray-600 placeholder:text-gray-300"
         />
         <button
           type="submit"

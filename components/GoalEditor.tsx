@@ -57,24 +57,25 @@ export default function GoalEditor({ goalList, onBack }: Props) {
     <>
       <PrintView title={goalList.title} goals={goals} />
       
-      <div className="space-y-8 print:hidden max-w-4xl mx-auto">
-        <div className="flex items-center justify-between border-b border-gray-300 pb-4">
-          <div className="flex items-center gap-4">
+      <div className="space-y-8 print:hidden max-w-4xl mx-auto" style={{ fontFamily: 'Lato, sans-serif' }}>
+        <div className="border-b border-gray-300 pb-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={onBack}
               className="text-gray-600 hover:text-gray-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100"
             >
               ← Back to Lists
             </button>
+            
             <h1 className="text-3xl font-light text-center">{goalList.title}</h1>
+            
+            <button
+              onClick={() => window.print()}
+              className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium"
+            >
+              Print Goals
+            </button>
           </div>
-          
-          <button
-            onClick={() => window.print()}
-            className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium"
-          >
-            Print Goals
-          </button>
         </div>
 
         {/* Category sections matching the HTML structure */}

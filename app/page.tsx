@@ -59,14 +59,17 @@ export default function Home() {
           />
         ) : (
           <div>
-            <div className="flex justify-between items-center mb-8 border-b border-gray-300 pb-4">
-              <h1 className="text-3xl font-light">Print Goals</h1>
-              <button
-                onClick={handleSignOut}
-                className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
-              >
-                Sign Out
-              </button>
+            <div className="mb-8 border-b border-gray-300 pb-4">
+              <div className="flex justify-between items-center">
+                <div></div>
+                <h1 className="text-3xl font-light text-center">Print Goals</h1>
+                <button
+                  onClick={handleSignOut}
+                  className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                >
+                  Sign Out
+                </button>
+              </div>
             </div>
             
             <div>
