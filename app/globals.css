@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+/* Print styles - exact match to original HTML */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    font-family: Lato, sans-serif !important;
+    margin: 0 auto !important;
+    padding-bottom: 40px !important;
+    width: 980px !important;
+    background: white !important;
+  }
+
+  /* Hide everything except print content */
+  .print\\:hidden {
+    display: none !important;
+  }
+
+  .print\\:block {
+    display: block !important;
+  }
+
+  /* Print-specific styles matching original HTML exactly */
+  .print-container h1 {
+    font-size: 32px !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-container h2 {
+    font-size: 24px !important;
+    margin: 30px 0 10px !important;
+    padding: 0 !important;
+  }
+
+  .print-container .goal {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-container .checkbox {
+    border: 2px solid black !important;
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    height: 20px !important;
+    margin-right: 20px !important;
+    width: 20px !important;
+    background: white !important;
+  }
+
+  .print-container .text {
+    font-size: 20px !important;
+    line-height: 20px !important;
+    vertical-align: top !important;
+  }
+
+  .print-container .progress-tracker {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-container .progress-tracker div {
+    border: 1px solid black !important;
+    box-sizing: border-box !important;
+    height: 20px !important;
+    line-height: 18px !important;
+    min-width: 20px !important;
+    max-width: 140px !important;
+    text-align: center !important;
+    background: white !important;
+  }
+
+  /* Hide all screen UI elements */
+  nav, header, aside, .no-print, .bg-gray-50, .shadow-md, button:not(.print-only) {
+    display: none !important;
+  }
+}
