@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { DEFAULT_CATEGORIES } from '@/lib/categories'
 import type { Goal } from '@/lib/types'
 
 interface Props {
@@ -54,8 +55,8 @@ export default function PrintView({ title, goals }: Props) {
           // Fill one row: 1/N width for N boxes
           div.style.width = (100 / count) + "%"
         } else {
-          // Use 40-per-row grid: 1/40th = 2.5%
-          div.style.width = "2.5%"
+          // Use 40-per-row grid: exact calculation for print
+          div.style.width = "calc(100% / 40)"
         }
         
         progressTracker.appendChild(div)
@@ -76,25 +77,34 @@ export default function PrintView({ title, goals }: Props) {
       <div className="print-container">
         <h1>{title}</h1>
 
-        {Object.entries(groupedGoals).map(([category, categoryGoals]) => (
-          <div key={category}>
-            <h2>{category}</h2>
-            
-            {categoryGoals.map((goal) => (
-              <p 
-                key={goal.id} 
-                className="goal" 
-                data-steps={goal.goal_type === 'steps' ? goal.step_count : undefined}
-                data-labelstyle={goal.goal_type === 'steps' ? goal.label_style : undefined}
-              >
-                {goal.goal_type === 'checkbox' && (
-                  <span className="checkbox"></span>
-                )}
-                <span className="text">{goal.title}</span>
-              </p>
-            ))}
-          </div>
-        ))}
+        {DEFAULT_CATEGORIES.map(category => {
+          const categoryGoals = groupedGoals[category] || []
+          return (
+            <div key={category}>
+              <h2>{category}</h2>
+              
+              {categoryGoals.length === 0 ? (
+                <p className="goal">
+                  <span className="text" style={{ fontStyle: 'italic', color: '#666' }}>No goals</span>
+                </p>
+              ) : (
+                categoryGoals.map((goal) => (
+                  <p 
+                    key={goal.id} 
+                    className="goal" 
+                    data-steps={goal.goal_type === 'steps' ? goal.step_count : undefined}
+                    data-labelstyle={goal.goal_type === 'steps' ? goal.label_style : undefined}
+                  >
+                    {goal.goal_type === 'checkbox' && (
+                      <span className="checkbox"></span>
+                    )}
+                    <span className="text">{goal.title}</span>
+                  </p>
+                ))
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
