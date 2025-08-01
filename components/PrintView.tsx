@@ -23,11 +23,12 @@ export default function PrintView({ title, goals }: Props) {
 
     // Add progress trackers for step goals
     containerRef.current.querySelectorAll("[data-steps]").forEach(goalElement => {
-      const count = parseInt(goalElement.dataset.steps || '0')
+      const htmlElement = goalElement as HTMLElement
+      const count = parseInt(htmlElement.dataset.steps || '0')
       if (count <= 0) return
 
       const pct = (1.0 / count) * 100
-      const labelStyle = goalElement.dataset.labelstyle
+      const labelStyle = htmlElement.dataset.labelstyle
 
       const progressTracker = document.createElement("p")
       progressTracker.className = "progress-tracker"
