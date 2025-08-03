@@ -74,7 +74,61 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleCreate} className="flex gap-2">
+      {goalLists.length === 0 ? (
+        <div className="text-center py-8 text-gray-500">
+          No goal lists yet. Create your first one below!
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {goalLists.map((list) => (
+            <div key={list.id} className="p-3 border border-gray-300 hover:bg-gray-50">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                {editingId === list.id ? (
+                  <input
+                    type="text"
+                    defaultValue={list.title}
+                    onBlur={(e) => handleUpdate(list.id, e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleUpdate(list.id, e.currentTarget.value)
+                      } else if (e.key === 'Escape') {
+                        setEditingId(null)
+                      }
+                    }}
+                    className="flex-1 px-2 py-1 border border-gray-400 focus:outline-none focus:border-gray-600"
+                    autoFocus
+                  />
+                ) : (
+                  <h3
+                    className="flex-1 text-lg font-normal cursor-pointer hover:text-gray-800"
+                    onClick={() => onSelectGoalList(list)}
+                  >
+                    {list.title}
+                  </h3>
+                )}
+                
+                <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                  <button
+                    onClick={() => setEditingId(editingId === list.id ? null : list.id)}
+                    className="flex-1 sm:flex-none px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
+                  >
+                    {editingId === list.id ? 'Cancel' : 'Edit'}
+                  </button>
+                  
+                  <button
+                    onClick={() => handleDelete(list.id)}
+                    className="flex-1 sm:flex-none px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <form onSubmit={handleCreate} className="flex flex-col sm:flex-row gap-2">
         <input
           type="text"
           value={newTitle}
@@ -84,61 +138,11 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
         />
         <button
           type="submit"
-          className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium"
+          className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium whitespace-nowrap"
         >
           Create List
         </button>
       </form>
-
-      {goalLists.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          No goal lists yet. Create your first one above!
-        </div>
-      ) : (
-        <div className="space-y-2">
-          {goalLists.map((list) => (
-            <div key={list.id} className="flex items-center gap-2 p-3 border border-gray-300 hover:bg-gray-50">
-              {editingId === list.id ? (
-                <input
-                  type="text"
-                  defaultValue={list.title}
-                  onBlur={(e) => handleUpdate(list.id, e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleUpdate(list.id, e.currentTarget.value)
-                    } else if (e.key === 'Escape') {
-                      setEditingId(null)
-                    }
-                  }}
-                  className="flex-1 px-2 py-1 border border-gray-400 focus:outline-none focus:border-gray-600"
-                  autoFocus
-                />
-              ) : (
-                <h3
-                  className="flex-1 text-lg font-normal cursor-pointer hover:text-gray-800"
-                  onClick={() => onSelectGoalList(list)}
-                >
-                  {list.title}
-                </h3>
-              )}
-              
-              <button
-                onClick={() => setEditingId(editingId === list.id ? null : list.id)}
-                className="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
-              >
-                {editingId === list.id ? 'Cancel' : 'Edit'}
-              </button>
-              
-              <button
-                onClick={() => handleDelete(list.id)}
-                className="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }

@@ -188,31 +188,33 @@ export default function CategorySection({
                   autoFocus
                 />
                 
-                <div className="flex gap-4 items-center">
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name={`edit_goal_type_${goal.id}`}
-                      value="checkbox"
-                      checked={editingGoal.goal_type === 'checkbox'}
-                      onChange={(e) => setEditingGoal({...editingGoal, goal_type: e.target.value as 'checkbox'})}
-                    />
-                    <span className="text-sm">Pass/Fail</span>
-                  </label>
-                  
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name={`edit_goal_type_${goal.id}`}
-                      value="steps"
-                      checked={editingGoal.goal_type === 'steps'}
-                      onChange={(e) => setEditingGoal({...editingGoal, goal_type: e.target.value as 'steps'})}
-                    />
-                    <span className="text-sm">Progress</span>
-                  </label>
+                <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name={`edit_goal_type_${goal.id}`}
+                        value="checkbox"
+                        checked={editingGoal.goal_type === 'checkbox'}
+                        onChange={(e) => setEditingGoal({...editingGoal, goal_type: e.target.value as 'checkbox'})}
+                      />
+                      <span className="text-sm">Pass/Fail</span>
+                    </label>
+                    
+                    <label className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name={`edit_goal_type_${goal.id}`}
+                        value="steps"
+                        checked={editingGoal.goal_type === 'steps'}
+                        onChange={(e) => setEditingGoal({...editingGoal, goal_type: e.target.value as 'steps'})}
+                      />
+                      <span className="text-sm">Progress</span>
+                    </label>
+                  </div>
 
                   {editingGoal.goal_type === 'steps' && (
-                    <>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
                       <select
                         value={editingGoal.progress_style}
                         onChange={(e) => setEditingGoal({...editingGoal, progress_style: e.target.value as 'monthly' | 'weekly' | 'daily' | 'count'})}
@@ -235,14 +237,14 @@ export default function CategorySection({
                           className="w-20 px-2 py-1 text-sm border border-gray-400 focus:outline-none focus:border-gray-600"
                         />
                       )}
-                    </>
+                    </div>
                   )}
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <button
                     onClick={handleUpdate}
-                    className="text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white"
+                    className="flex-1 sm:flex-none text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white whitespace-nowrap"
                   >
                     Save
                   </button>
@@ -251,7 +253,7 @@ export default function CategorySection({
                       setEditingId(null)
                       setEditingGoal(null)
                     }}
-                    className="text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white"
+                    className="flex-1 sm:flex-none text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white whitespace-nowrap"
                   >
                     Cancel
                   </button>
@@ -261,19 +263,40 @@ export default function CategorySection({
               <div className="relative">
                 <GoalDisplay goal={goal} />
                 
-                <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1 bg-white border border-gray-300 rounded shadow-sm">
-                  <button
-                    onClick={() => startEditing(goal)}
-                    className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(goal.id)}
-                    className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
-                  >
-                    Delete
-                  </button>
+                {/* Desktop buttons - always visible */}
+                <div className="hidden sm:block absolute top-0 right-0">
+                  <div className="flex gap-1 bg-white border border-gray-300 rounded shadow-sm">
+                    <button
+                      onClick={() => startEditing(goal)}
+                      className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(goal.id)}
+                      className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Mobile buttons below goal */}
+                <div className="sm:hidden mt-2">
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => startEditing(goal)}
+                      className="flex-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white hover:bg-gray-100 whitespace-nowrap"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(goal.id)}
+                      className="flex-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white hover:bg-gray-100 whitespace-nowrap"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -294,31 +317,33 @@ export default function CategorySection({
             required
           />
           
-          <div className="flex gap-4 items-center">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="goal_type"
-                value="checkbox"
-                checked={newGoal.goal_type === 'checkbox'}
-                onChange={(e) => setNewGoal({...newGoal, goal_type: e.target.value as 'checkbox'})}
-              />
-              <span className="text-sm">Pass/Fail</span>
-            </label>
-            
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="goal_type"
-                value="steps"
-                checked={newGoal.goal_type === 'steps'}
-                onChange={(e) => setNewGoal({...newGoal, goal_type: e.target.value as 'steps'})}
-              />
-              <span className="text-sm">Progress</span>
-            </label>
+          <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="goal_type"
+                  value="checkbox"
+                  checked={newGoal.goal_type === 'checkbox'}
+                  onChange={(e) => setNewGoal({...newGoal, goal_type: e.target.value as 'checkbox'})}
+                />
+                <span className="text-sm">Pass/Fail</span>
+              </label>
+              
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="goal_type"
+                  value="steps"
+                  checked={newGoal.goal_type === 'steps'}
+                  onChange={(e) => setNewGoal({...newGoal, goal_type: e.target.value as 'steps'})}
+                />
+                <span className="text-sm">Progress</span>
+              </label>
+            </div>
 
             {newGoal.goal_type === 'steps' && (
-              <>
+              <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
                 <select
                   value={newGoal.progress_style}
                   onChange={(e) => setNewGoal({...newGoal, progress_style: e.target.value as 'monthly' | 'weekly' | 'daily' | 'count'})}
@@ -342,14 +367,14 @@ export default function CategorySection({
                     required
                   />
                 )}
-              </>
+              </div>
             )}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
               type="submit"
-              className="px-3 py-1 text-sm border border-gray-600 bg-white hover:bg-gray-100"
+              className="flex-1 sm:flex-none px-3 py-1 text-sm border border-gray-600 bg-white hover:bg-gray-100 whitespace-nowrap"
             >
               Add Goal
             </button>
@@ -364,7 +389,7 @@ export default function CategorySection({
                   step_count: undefined
                 })
               }}
-              className="px-3 py-1 text-sm border border-gray-400 bg-white hover:bg-gray-100"
+              className="flex-1 sm:flex-none px-3 py-1 text-sm border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
             >
               Cancel
             </button>
