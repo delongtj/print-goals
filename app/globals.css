@@ -68,10 +68,14 @@
   }
 
   .print-container .print-goals-title {
-    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
+    font-family: 'Lato, sans-serif' !important;
+    font-weight: 300 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  .print-container .print-goals-title::after {
+    display: none !important;
   }
 
   .print-container h2 {
@@ -81,7 +85,7 @@
   }
 
   .print-container .goal {
-    margin: 0 !important;
+    margin: 0 0 16px 0 !important;
     padding: 0 !important;
   }
 
