@@ -260,39 +260,58 @@ export default function CategorySection({
                 </div>
               </div>
             ) : (
-              <div className="relative">
+              <div className={goal.goal_type === 'checkbox' ? 'sm:relative' : ''}>
                 <GoalDisplay goal={goal} />
                 
-                {/* Desktop buttons - always visible */}
-                <div className="hidden sm:block absolute top-0 right-0">
-                  <div className="flex gap-1 bg-white border border-gray-300 rounded shadow-sm">
+                {/* Desktop: Inline buttons for checkbox goals, below for step goals */}
+                {goal.goal_type === 'checkbox' && (
+                  <div className="hidden sm:flex absolute top-0 right-0 mt-1 mr-1 gap-2">
                     <button
                       onClick={() => startEditing(goal)}
-                      className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(goal.id)}
-                      className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Delete
                     </button>
                   </div>
-                </div>
+                )}
                 
-                {/* Mobile buttons below goal */}
-                <div className="sm:hidden mt-2">
+                {goal.goal_type === 'steps' && (
+                  <div className="hidden sm:flex mt-2 justify-end">
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => startEditing(goal)}
+                        className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(goal.id)}
+                        className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Mobile: Always below goal for all types */}
+                <div className="sm:hidden mt-2 flex justify-end">
                   <div className="flex gap-2">
                     <button
                       onClick={() => startEditing(goal)}
-                      className="flex-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white hover:bg-gray-100 whitespace-nowrap"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(goal.id)}
-                      className="flex-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white hover:bg-gray-100 whitespace-nowrap"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Delete
                     </button>

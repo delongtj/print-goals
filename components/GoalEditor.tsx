@@ -60,27 +60,18 @@ export default function GoalEditor({ goalList, onBack }: Props) {
       <div className="space-y-8 print:hidden max-w-4xl mx-auto" style={{ fontFamily: 'Lato, sans-serif' }}>
         <div className="border-b border-gray-300 pb-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center justify-between sm:justify-start sm:flex-1">
-              <button
-                onClick={onBack}
-                className="text-gray-600 hover:text-gray-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100 whitespace-nowrap"
-              >
-                ← Back to Lists
-              </button>
-              
-              <button
-                onClick={() => window.print()}
-                className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium whitespace-nowrap sm:hidden"
-              >
-                Print Goals
-              </button>
-            </div>
+            <button
+              onClick={onBack}
+              className="text-gray-600 hover:text-gray-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100 whitespace-nowrap order-1 sm:order-none"
+            >
+              ← Back to Lists
+            </button>
             
-            <h1 className="text-3xl font-light text-center sm:flex-1">{goalList.title}</h1>
+            <h1 className="text-3xl font-light text-center order-2 sm:order-none">{goalList.title}</h1>
             
             <button
               onClick={() => window.print()}
-              className="hidden sm:block px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium whitespace-nowrap"
+              className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium whitespace-nowrap order-3 sm:order-none"
             >
               Print Goals
             </button>
