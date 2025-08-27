@@ -76,7 +76,7 @@ export default function PrintView({ title, goals }: Props) {
   return (
     <div ref={containerRef} className="print:block hidden">
       <div className="print-container">
-        <h1>{title}</h1>
+        <h1 className="print-goals-title">{title}</h1>
 
         {DEFAULT_CATEGORIES.map(category => {
           const categoryGoals = groupedGoals[category] || []

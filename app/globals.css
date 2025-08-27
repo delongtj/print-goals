@@ -3,6 +3,32 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* Print Goals Title Styling */
+.print-goals-title {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.print-goals-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    #374151 0,
+    #374151 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
 
 /* Print styles - exact match to original HTML */
 @media print {
@@ -39,6 +65,13 @@
     text-align: center !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  .print-container .print-goals-title {
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
   }
 
   .print-container h2 {

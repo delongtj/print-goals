@@ -39,7 +39,10 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-white p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-light text-center mb-8 border-b border-gray-300 pb-4">Print Goals</h1>
+          <div className="flex items-center justify-center gap-3 mb-8 border-b border-gray-300 pb-4">
+            <img src="/logo.svg" alt="Print Goals" className="w-8 h-8" />
+            <h1 className="text-3xl print-goals-title">Print Goals</h1>
+          </div>
           <p className="text-center text-gray-600 mb-8">
             Sign in to create and manage your goal lists
           </p>
@@ -65,7 +68,10 @@ export default function Home() {
                   {/* Spacer for mobile sign out button alignment */}
                 </div>
                 
-                <h1 className="text-3xl font-light text-center order-1 sm:order-none">Print Goals</h1>
+                <div className="flex items-center justify-center gap-3 order-1 sm:order-none">
+                  <img src="/logo.svg" alt="Print Goals" className="w-8 h-8" />
+                  <h1 className="text-3xl print-goals-title">Print Goals</h1>
+                </div>
                 
                 <button
                   onClick={handleSignOut}
