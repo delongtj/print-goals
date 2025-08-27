@@ -3,31 +3,24 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&display=swap');
 
 /* Print Goals Title Styling */
 .print-goals-title {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   position: relative;
 }
 
 .print-goals-title::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: -3px;
   left: 0;
   right: 0;
   height: 1px;
-  background: repeating-linear-gradient(
-    90deg,
-    #262626 0,
-    #262626 4px,
-    transparent 4px,
-    transparent 8px
-  );
+  background: #262626;
 }
 
 /* Print styles - exact match to original HTML */
@@ -71,7 +64,6 @@
     font-family: Lato, sans-serif !important;
     font-weight: 300 !important;
     letter-spacing: normal !important;
-    text-transform: none !important;
   }
 
   .print-container .print-goals-title::after {
