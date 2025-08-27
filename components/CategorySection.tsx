@@ -265,7 +265,7 @@ export default function CategorySection({
                 
                 {/* Desktop: Inline buttons for checkbox goals, below for step goals */}
                 {goal.goal_type === 'checkbox' && (
-                  <div className="hidden sm:flex absolute top-0 right-0 mt-1 mr-1 gap-2">
+                  <div className="hidden sm:flex absolute top-0 right-0 mt-1 gap-2">
                     <button
                       onClick={() => startEditing(goal)}
                       className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
