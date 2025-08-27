@@ -62,7 +62,7 @@ export default function GoalEditor({ goalList, onBack }: Props) {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <button
               onClick={onBack}
-              className="text-gray-600 hover:text-gray-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100 whitespace-nowrap order-1 sm:order-none"
+              className="text-gray-600 hover:text-neutral-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100 whitespace-nowrap order-1 sm:order-none"
             >
               ← Back to Lists
             </button>
@@ -71,7 +71,7 @@ export default function GoalEditor({ goalList, onBack }: Props) {
             
             <button
               onClick={() => window.print()}
-              className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium whitespace-nowrap order-3 sm:order-none"
+              className="px-4 py-2 border-2 border-neutral-800 bg-white hover:bg-gray-100 text-neutral-800 font-medium whitespace-nowrap order-3 sm:order-none"
             >
               Print Goals
             </button>

@@ -1,6 +1,6 @@
 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Paper with subtle printer lines -->
-  <rect x="8" y="6" width="32" height="36" rx="2" fill="white" stroke="#374151" stroke-width="2"/>
+  <rect x="8" y="6" width="32" height="36" rx="2" fill="white" stroke="#262626" stroke-width="2"/>
   
   <!-- Printer feed holes (classic dot-matrix paper style) -->
   <circle cx="6" cy="12" r="1" fill="#9CA3AF"/>
@@ -17,28 +17,28 @@
   
   <!-- Goal checklist items -->
   <!-- Goal 1 - checked -->
-  <rect x="12" y="12" width="3" height="3" stroke="#374151" stroke-width="1.5" fill="white"/>
-  <path d="M13 13.5L14 14.5L16.5 12" stroke="#374151" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="18" y1="13.5" x2="32" y2="13.5" stroke="#374151" stroke-width="1"/>
+  <rect x="12" y="12" width="3" height="3" stroke="#262626" stroke-width="1.5" fill="white"/>
+  <path d="M13 13.5L14 14.5L16.5 12" stroke="#262626" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="18" y1="13.5" x2="32" y2="13.5" stroke="#262626" stroke-width="1"/>
   
   <!-- Goal 2 - checked -->
-  <rect x="12" y="18" width="3" height="3" stroke="#374151" stroke-width="1.5" fill="white"/>
-  <path d="M13 19.5L14 20.5L16.5 18" stroke="#374151" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="18" y1="19.5" x2="28" y2="19.5" stroke="#374151" stroke-width="1"/>
+  <rect x="12" y="18" width="3" height="3" stroke="#262626" stroke-width="1.5" fill="white"/>
+  <path d="M13 19.5L14 20.5L16.5 18" stroke="#262626" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="18" y1="19.5" x2="28" y2="19.5" stroke="#262626" stroke-width="1"/>
   
   <!-- Goal 3 - unchecked -->
-  <rect x="12" y="24" width="3" height="3" stroke="#374151" stroke-width="1.5" fill="white"/>
-  <line x1="18" y1="25.5" x2="30" y2="25.5" stroke="#374151" stroke-width="1"/>
+  <rect x="12" y="24" width="3" height="3" stroke="#262626" stroke-width="1.5" fill="white"/>
+  <line x1="18" y1="25.5" x2="30" y2="25.5" stroke="#262626" stroke-width="1"/>
   
   <!-- Goal 4 - unchecked -->
-  <rect x="12" y="30" width="3" height="3" stroke="#374151" stroke-width="1.5" fill="white"/>
-  <line x1="18" y1="31.5" x2="26" y2="31.5" stroke="#374151" stroke-width="1"/>
+  <rect x="12" y="30" width="3" height="3" stroke="#262626" stroke-width="1.5" fill="white"/>
+  <line x1="18" y1="31.5" x2="26" y2="31.5" stroke="#262626" stroke-width="1"/>
   
   <!-- Progress tracking boxes (representing the progress charts) -->
-  <rect x="12" y="36" width="2" height="2" stroke="#374151" stroke-width="1" fill="white"/>
-  <rect x="15" y="36" width="2" height="2" stroke="#374151" stroke-width="1" fill="#374151"/>
-  <rect x="18" y="36" width="2" height="2" stroke="#374151" stroke-width="1" fill="#374151"/>
-  <rect x="21" y="36" width="2" height="2" stroke="#374151" stroke-width="1" fill="white"/>
-  <rect x="24" y="36" width="2" height="2" stroke="#374151" stroke-width="1" fill="white"/>
-  <rect x="27" y="36" width="2" height="2" stroke="#374151" stroke-width="1" fill="white"/>
+  <rect x="12" y="36" width="2" height="2" stroke="#262626" stroke-width="1" fill="white"/>
+  <rect x="15" y="36" width="2" height="2" stroke="#262626" stroke-width="1" fill="#262626"/>
+  <rect x="18" y="36" width="2" height="2" stroke="#262626" stroke-width="1" fill="#262626"/>
+  <rect x="21" y="36" width="2" height="2" stroke="#262626" stroke-width="1" fill="white"/>
+  <rect x="24" y="36" width="2" height="2" stroke="#262626" stroke-width="1" fill="white"/>
+  <rect x="27" y="36" width="2" height="2" stroke="#262626" stroke-width="1" fill="white"/>
 </svg>

@@ -100,7 +100,7 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
                   />
                 ) : (
                   <h3
-                    className="flex-1 text-lg font-normal cursor-pointer hover:text-gray-800"
+                    className="flex-1 text-lg font-normal cursor-pointer hover:text-neutral-800"
                     onClick={() => onSelectGoalList(list)}
                   >
                     {list.title}
@@ -110,14 +110,14 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
                 <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                   <button
                     onClick={() => setEditingId(editingId === list.id ? null : list.id)}
-                    className="flex-1 sm:flex-none px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
+                    className="flex-1 sm:flex-none px-2 py-1 text-sm text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
                   >
                     {editingId === list.id ? 'Cancel' : 'Edit'}
                   </button>
                   
                   <button
                     onClick={() => handleDelete(list.id)}
-                    className="flex-1 sm:flex-none px-2 py-1 text-sm text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
+                    className="flex-1 sm:flex-none px-2 py-1 text-sm text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100 whitespace-nowrap"
                   >
                     Delete
                   </button>
@@ -138,7 +138,7 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
         />
         <button
           type="submit"
-          className="px-4 py-2 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium whitespace-nowrap"
+          className="px-4 py-2 border-2 border-neutral-800 bg-white hover:bg-gray-100 text-neutral-800 font-medium whitespace-nowrap"
         >
           Create List
         </button>

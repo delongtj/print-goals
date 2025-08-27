@@ -47,14 +47,14 @@ export default function AuthForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 border-2 border-gray-800 bg-white hover:bg-gray-100 text-gray-800 font-medium disabled:opacity-50"
+          className="w-full py-2 px-4 border-2 border-neutral-800 bg-white hover:bg-gray-100 text-neutral-800 font-medium disabled:opacity-50"
         >
           {loading ? 'Sending...' : 'Send Magic Link'}
         </button>
       </form>
       
       {message && (
-        <p className={`mt-4 text-sm text-center ${message.startsWith('Error') ? 'text-gray-800' : 'text-gray-600'}`}>
+        <p className={`mt-4 text-sm text-center ${message.startsWith('Error') ? 'text-neutral-800' : 'text-gray-600'}`}>
           {message}
         </p>
       )}

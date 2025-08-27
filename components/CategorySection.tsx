@@ -244,7 +244,7 @@ export default function CategorySection({
                 <div className="flex flex-col sm:flex-row gap-2">
                   <button
                     onClick={handleUpdate}
-                    className="flex-1 sm:flex-none text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white whitespace-nowrap"
+                    className="flex-1 sm:flex-none text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 px-2 py-1 bg-white whitespace-nowrap"
                   >
                     Save
                   </button>
@@ -253,7 +253,7 @@ export default function CategorySection({
                       setEditingId(null)
                       setEditingGoal(null)
                     }}
-                    className="flex-1 sm:flex-none text-xs text-gray-600 hover:text-gray-800 border border-gray-400 px-2 py-1 bg-white whitespace-nowrap"
+                    className="flex-1 sm:flex-none text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 px-2 py-1 bg-white whitespace-nowrap"
                   >
                     Cancel
                   </button>
@@ -268,13 +268,13 @@ export default function CategorySection({
                   <div className="hidden sm:flex absolute top-0 right-0 mt-1 mr-1 gap-2">
                     <button
                       onClick={() => startEditing(goal)}
-                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(goal.id)}
-                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Delete
                     </button>
@@ -286,13 +286,13 @@ export default function CategorySection({
                     <div className="flex gap-2">
                       <button
                         onClick={() => startEditing(goal)}
-                        className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                        className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(goal.id)}
-                        className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                        className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
                       >
                         Delete
                       </button>
@@ -305,13 +305,13 @@ export default function CategorySection({
                   <div className="flex gap-2">
                     <button
                       onClick={() => startEditing(goal)}
-                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(goal.id)}
-                      className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 border border-gray-400 bg-white hover:bg-gray-100"
+                      className="px-2 py-1 text-xs text-gray-600 hover:text-neutral-800 border border-gray-400 bg-white hover:bg-gray-100"
                     >
                       Delete
                     </button>
@@ -417,7 +417,7 @@ export default function CategorySection({
       ) : (
         <button
           onClick={() => setIsAdding(true)}
-          className="text-sm text-gray-600 hover:text-gray-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100"
+          className="text-sm text-gray-600 hover:text-neutral-800 border border-gray-400 px-3 py-1 bg-white hover:bg-gray-100"
         >
           + Add {category} Goal
         </button>
