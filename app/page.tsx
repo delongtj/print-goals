@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import ExampleGoalList from '@/components/ExampleGoalList'
 import ExamplePrintView from '@/components/ExamplePrintView'
 
 export default function Home() {
@@ -79,7 +78,12 @@ export default function Home() {
           <h2 className="text-3xl font-semibold mb-4">Your printed goal list</h2>
           <p className="text-gray-600 mb-8">Clean, organized, ready to hang on your wall:</p>
           <div className="flex justify-center">
-            <ExampleGoalList />
+            <img 
+              src="/example.png" 
+              alt="Example printed goal list showing various goal types across categories like Spiritual, Family, Physical, Financial, Educational, and Career" 
+              className="max-w-full h-auto border border-gray-200 rounded-lg shadow-sm"
+              style={{ maxWidth: '600px' }}
+            />
           </div>
         </div>
 
