@@ -77,12 +77,11 @@ export default function Home() {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-semibold mb-4">Your printed goal list</h2>
           <p className="text-gray-600 mb-8">Clean, organized, ready to hang on your wall:</p>
-          <div className="flex justify-center">
+          <div className="flex justify-center px-4">
             <img 
               src="/example.png" 
               alt="Example printed goal list showing various goal types across categories like Spiritual, Family, Physical, Financial, Educational, and Career" 
-              className="max-w-full h-auto border border-gray-200 rounded-lg shadow-sm"
-              style={{ maxWidth: '600px' }}
+              className="w-full max-w-[600px] h-auto border border-gray-200 rounded-lg shadow-sm"
             />
           </div>
         </div>
