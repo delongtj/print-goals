@@ -105,10 +105,18 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-gray-200 bg-gray-50">
         <div className="max-w-6xl mx-auto px-8 py-8">
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
             <div className="flex items-center gap-3 text-gray-600">
               <img src="/logo.svg" alt="Print Goals" className="w-6 h-6" />
               <span className="text-sm">Print Goals - Keep your goals in sight</span>
+            </div>
+            <div className="flex gap-6 text-sm text-gray-600">
+              <Link href="/terms" className="hover:text-neutral-800">
+                Terms of Service
+              </Link>
+              <Link href="/privacy" className="hover:text-neutral-800">
+                Privacy Policy
+              </Link>
             </div>
           </div>
         </div>
