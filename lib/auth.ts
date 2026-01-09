@@ -1,13 +1,22 @@
 import { supabase } from './supabase'
 
-export async function signInWithEmail(email: string) {
+export async function sendSignInCode(email: string) {
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
+      channel: 'email',
     },
   })
   return { error }
+}
+
+export async function verifySignInCode(email: string, token: string) {
+  const { data, error } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: 'email',
+  })
+  return { data, error }
 }
 
 export async function signOut() {
