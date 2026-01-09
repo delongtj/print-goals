@@ -3,9 +3,6 @@ import { supabase } from './supabase'
 export async function sendSignInCode(email: string) {
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: {
-      channel: 'email',
-    },
   })
   return { error }
 }

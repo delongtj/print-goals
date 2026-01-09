@@ -47,6 +47,10 @@ export default function AuthForm() {
     <div className="max-w-md mx-auto mt-8 p-6 border border-gray-300">
       <h2 className="text-2xl font-normal mb-6 text-center">Sign In</h2>
       
+      <p className="text-sm text-gray-600 mb-6 text-center">
+        Enter your email and we'll send you a code. No password needed. If this is your first time, we'll create an account for you.
+      </p>
+      
       {step === 'email' ? (
         <form onSubmit={handleSendCode} className="space-y-4">
           <div>
