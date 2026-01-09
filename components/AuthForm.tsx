@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { sendSignInCode, verifySignInCode } from '@/lib/auth'
 
 export default function AuthForm() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
@@ -36,11 +38,12 @@ export default function AuthForm() {
 
     if (error) {
       setMessage('Error: ' + error.message)
+      setLoading(false)
     } else if (data) {
       setMessage('Signed in successfully!')
+      // Small delay for UX, then redirect
+      setTimeout(() => router.push('/app'), 500)
     }
-
-    setLoading(false)
   }
 
   return (
