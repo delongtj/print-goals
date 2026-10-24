@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&display=swap');
 
 /* Print Goals Title Styling */
 .print-goals-title {
@@ -38,11 +38,11 @@
   }
 
   /* Hide everything except print content */
-  .print\\:hidden {
+  .print\:hidden {
     display: none !important;
   }
 
-  .print\\:block {
+  .print\:block {
     display: block !important;
   }
 
