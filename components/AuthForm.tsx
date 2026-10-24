@@ -51,7 +51,7 @@ export default function AuthForm() {
       <h2 className="text-2xl font-normal mb-6 text-center">Sign In</h2>
       
       <p className="text-sm text-gray-600 mb-6 text-center">
-        Enter your email and we'll send you a code. No password needed. If this is your first time, we'll create an account for you.
+        Enter your email and we&apos;ll send you a code. No password needed. If this is your first time, we&apos;ll create an account for you.
       </p>
       
       {step === 'email' ? (

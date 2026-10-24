@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getGoals } from '@/lib/goals'
 import PrintView from './PrintView'
 import CategorySection from './CategorySection'
@@ -16,11 +16,7 @@ export default function GoalEditor({ goalList, onBack }: Props) {
   const [goals, setGoals] = useState<Goal[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    loadGoals()
-  }, [goalList.id])
-
-  const loadGoals = async () => {
+  const loadGoals = useCallback(async () => {
     try {
       const goalsData = await getGoals(goalList.id)
       setGoals(goalsData)
@@ -29,7 +25,11 @@ export default function GoalEditor({ goalList, onBack }: Props) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [goalList.id])
+
+  useEffect(() => {
+    loadGoals()
+  }, [loadGoals])
 
   const handleGoalCreated = (newGoal: Goal) => {
     setGoals([...goals, newGoal])

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getGoalLists, createGoalList, updateGoalList, deleteGoalList } from '@/lib/goals'
 import type { GoalList } from '@/lib/types'
 import type { User } from '@supabase/supabase-js'
@@ -16,11 +16,7 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
   const [newTitle, setNewTitle] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
 
-  useEffect(() => {
-    loadGoalLists()
-  }, [user.id])
-
-  const loadGoalLists = async () => {
+  const loadGoalLists = useCallback(async () => {
     try {
       const lists = await getGoalLists(user.id)
       setGoalLists(lists)
@@ -29,7 +25,11 @@ export default function GoalListManager({ user, onSelectGoalList }: Props) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [user.id])
+
+  useEffect(() => {
+    loadGoalLists()
+  }, [loadGoalLists])
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()

@@ -30,7 +30,7 @@ export default function Home() {
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Turn your aspirations into something tangible. 
-            Organize goals across seven key areas—Spiritual, Family, Physical, Financial, Educational, Career, and Social—then print them out and keep them where you'll see them every day.
+            Organize goals across seven key areas—Spiritual, Family, Physical, Financial, Educational, Career, and Social—then print them out and keep them where you&apos;ll see them every day.
           </p>
           <div className="flex justify-center">
             <Link 
@@ -59,7 +59,7 @@ export default function Home() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Always Visible</h3>
             <p className="text-gray-600">
-              Print and place your goals where you'll see them daily. On your wall, fridge, or desk—constant gentle reminders.
+              Print and place your goals where you&apos;ll see them daily. On your wall, fridge, or desk—constant gentle reminders.
             </p>
           </div>
           <div className="text-center">

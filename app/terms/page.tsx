@@ -59,7 +59,7 @@ export default function TermsPage() {
 
           <h2>7. Limitation of Liability</h2>
           <p>
-            Print Goals is provided "as is" without any warranties. We shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of the service.
+            Print Goals is provided &quot;as is&quot; without any warranties. We shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of the service.
           </p>
 
           <h2>8. Termination</h2>
